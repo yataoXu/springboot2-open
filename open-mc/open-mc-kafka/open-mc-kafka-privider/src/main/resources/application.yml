@@ -1,0 +1,20 @@
+spring:
+  messages:
+    basename: i18n/Messages,i18n/Pages
+  kafka:
+    #bootstrap-servers: 10.10.2.138:9092,10.10.2.138:9093,10.10.2.138:9094
+    bootstrap-servers: 47.106.106.53:9092
+    template:
+      default-topic: self-topic0
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer  #key-value序列化反序列化
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # 重试次数
+      retries: 3
+      # 批量发送的消息数量
+      batch-size: 16384
+      # 32MB的批处理缓冲区，#producer可以用来缓存数据的内存大小。
+      #如果数据产生速度大于向broker发送的速度，producer会阻塞或者抛出异常，以“block.on.buffer.full”来表明。
+      #这项设置将和producer能够使用的总内存相关，但并不是一个硬性的限制，
+      #因为不是producer使用的所有内存都是用于缓存。一些额外的内存会用于压缩（如果引入压缩机制），同样还有一些用于维护请求。
+      buffer-memory: 33554432

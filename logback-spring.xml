@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <logger name="org.springframework.web" level="DEBUG"/>
+    <logger name="org.springboot.sample" level="TRACE" />
+    <!--输出到文件 -->
+   <appender name="file"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>./log/console.log</file>  
+        <append>true</append>  
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+            <fileNamePattern>./logBackup/nads_%d{yyyy-MM-dd}.log.zip</fileNamePattern>  
+            <maxHistory>30</maxHistory>  
+        </rollingPolicy>  
+        <encoder>  
+            <pattern>
+                 ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+            </pattern>  
+        </encoder>  
+	</appender>
+
+    <root>
+        <appender-ref ref="file" />
+    </root>
+
+    <!-- 开发、测试环境 -->
+    <springProfile name="dev,test">
+        <logger name="org.springframework.web" level="DEBUG"/>
+        <logger name="org.springboot.sample" level="DEBUG" />
+        <logger name="cn.myframe" level="INFO" />
+    </springProfile>
+
+    <!-- 生产环境 -->
+    <springProfile name="pro">
+        <logger name="org.springframework.web" level="DEBUG"/>
+        <logger name="org.springboot.sample" level="DEBUG" />
+        <logger name="cn.myframe" level="DEBUG" />
+    </springProfile>
+
+</configuration>

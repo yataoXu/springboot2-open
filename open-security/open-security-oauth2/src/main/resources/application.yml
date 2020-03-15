@@ -1,0 +1,4 @@
+#spring设置地区
+spring:
+  mvc:
+    locale: zh_CN

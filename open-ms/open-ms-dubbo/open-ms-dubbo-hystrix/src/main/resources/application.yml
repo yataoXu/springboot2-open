@@ -1,0 +1,23 @@
+# Tomcat
+server:
+    tomcat:
+        max-threads: 1000
+        min-spare-threads: 10
+    port: 8093
+
+
+spring:
+     dubbo:
+             appname: hystrix
+             registry: zookeeper://10.10.2.138:2181?backup=10.10.2.139:2181,10.10.2.137:2181
+             protocol:
+                     name: dubbo
+                     port: 20883
+                     hose: 127.0.0.1
+
+spring.application.name: dubbo-hystrix
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false

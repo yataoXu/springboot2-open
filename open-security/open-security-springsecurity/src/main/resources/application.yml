@@ -1,0 +1,18 @@
+spring:
+  messages:
+    basename: i18n/Messages,i18n/Pages
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver      # 配置MySQL的驱动程序类
+    url: jdbc:mysql://47.106.106.53:3306/security?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8           # 数据库连接地址
+    username: root                                  # 数据库用户名
+    password: Rojao@123
+
+
+spring.jpa.database: mysql
+spring.jpa.database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+# 显示后台处理的SQL语句
+spring.jpa.show-sql: true
+# 自动检查实体和数据库表是否一致，如果不一致则会进行更新数据库表
+spring.jpa.hibernate.ddl-auto: update
+spring.jpa.open-in-view: false

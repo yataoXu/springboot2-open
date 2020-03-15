@@ -1,0 +1,28 @@
+# Mybatis配置
+mybatis:
+    mapperLocations: classpath:mapper/*/*.xml
+    configLocation: classpath:mybatis.xml
+
+#sharding-jdbc
+sharding.jdbc.datasource.names: ds0,ds1
+
+sharding.jdbc.datasource.ds0.type: com.alibaba.druid.pool.DruidDataSource
+sharding.jdbc.datasource.ds0.driver-class-name: org.gjt.mm.mysql.Driver
+sharding.jdbc.datasource.ds0.url: jdbc:mysql://10.10.2.137:3306/ds0?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+sharding.jdbc.datasource.ds0.username: root
+sharding.jdbc.datasource.ds0.password: Rojao@123
+
+sharding.jdbc.datasource.ds1.type: com.alibaba.druid.pool.DruidDataSource
+sharding.jdbc.datasource.ds1.driver-class-name: org.gjt.mm.mysql.Driver
+sharding.jdbc.datasource.ds1.url: jdbc:mysql://10.10.2.137:3306/ds1?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+sharding.jdbc.datasource.ds1.username: root
+sharding.jdbc.datasource.ds1.password: Rojao@123
+
+sharding.jdbc.config.sharding.tables.bus_receiver.actual-data-nodes: ds$->{0..1}.bus_receiver_${0..1}
+sharding.jdbc.config.sharding.tables.bus_receiver.key-generator-column-name: id
+
+#sharding.jdbc.config.sharding.tables.bus_receiver.table-strategy.hint.sharding-column: id
+sharding.jdbc.config.sharding.tables.bus_receiver.database-strategy.hint.algorithm-class-name: cn.myframe.sharding.MyHintShardingAlgorithm
+sharding.jdbc.config.sharding.tables.bus_receiver.table-strategy.hint.algorithm-class-name: cn.myframe.sharding.MyHintShardingAlgorithm
+#sharding.jdbc.config.sharding.tables.bus_receiver.table-strategy.inline.sharding-column: id
+#sharding.jdbc.config.sharding.tables.bus_receiver.table-strategy.inline.algorithm-expression: bus_receiver_${id % 2}

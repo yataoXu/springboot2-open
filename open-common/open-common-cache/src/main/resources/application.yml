@@ -1,0 +1,12 @@
+myframe:
+   user:
+      name: tom
+      age: 29
+      address: 广东广州天河
+      uuid: ${random.uuid}
+      desc: ${myframe.user.name} is ${myframe.user.age} years old
+      date: 2018/09/20
+      hobby[0]: 打球
+      hobby[1]: 写代码
+      list: topic1,topic2,topic3
+      maps: "{key1: 'value1', key2: 'value2'}"

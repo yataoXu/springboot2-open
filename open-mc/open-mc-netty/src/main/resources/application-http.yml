@@ -1,0 +1,6 @@
+netty:
+   http:
+     enabled: true
+     port: 1999
+     bossThreads: 2
+     workThreads: 4

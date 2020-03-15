@@ -1,0 +1,7 @@
+netty:
+   proxy-client:
+      enabled: true
+      proxy-server: 127.0.0.1:9562
+      proxy-keys: 123
+
+             

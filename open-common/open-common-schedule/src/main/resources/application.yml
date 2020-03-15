@@ -1,0 +1,20 @@
+article.author: cowbin2012
+article.list: https://blog.csdn.net/${article.author}/article/list/NumPage?
+article.page-size: 10
+article.ip-flag: 0
+# Tomcat
+server:
+    tomcat:
+        max-threads: 1000
+        min-spare-threads: 10
+    port: 8081
+    servlet:
+        context-path: /
+
+logging:
+    path: /log
+    config: ./logback-spring.xml
+
+comment.cookie-values[0]: uuid_tt_dd=10_19926310520-1546525573836-354072; UN=cowbin2012; smidV2=20190106090303b453f10647ac2a5bd61540fd55880f6700ec31a6b70e64650; __yadk_uid=iPN6FFSr7GaiVATfyiKCO80xvdnXhkg0; ADHOC_MEMBERSHIP_CLIENT_ID1.0=c0f26298-8b5c-e364-cff0-6768f5eadeeb; UM_distinctid=168f951c453739-02db82f77ed812-58422116-144000-168f951c454416; Hm_ct_6bcd52f51e9b3dce32bec4a3997715ac=5744*1*cowbin2012!1788*1*PC_VC!6525*1*10_19926310520-1546525573836-354072; UserName=cowbin2012; UserInfo=dd947ddfdf394ad1be875034ad9e5291; UserToken=dd947ddfdf394ad1be875034ad9e5291; UserNick=cowbin2012; AU=DC4; BT=1556961891047; firstDie=1; dc_session_id=10_1557594978680.568480; Hm_lvt_6bcd52f51e9b3dce32bec4a3997715ac=1557642157,1557642172,1557654127,1557654131; dc_tos=prdycy; Hm_lpvt_6bcd52f51e9b3dce32bec4a3997715ac=1557655091
+comment.author: libin_1
+comment.authors: purpleendurer,keshuai19940722,justdb,leiphone,libin_1,iefreer,yanzi1225627,hitwhylz,ghj1976,cheny_com,morewindows

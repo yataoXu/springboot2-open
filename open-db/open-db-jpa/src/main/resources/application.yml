@@ -1,0 +1,29 @@
+spring:
+  messages:
+    basename: i18n/Messages,i18n/Pages
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver      # 配置MySQL的驱动程序类
+    url: jdbc:mysql://47.106.106.53:3306/mybatis?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8           # 数据库连接地址
+    username: root                                  # 数据库用户名
+    password: Rojao@123
+
+
+spring.jpa.database: mysql
+spring.jpa.database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+# 显示后台处理的SQL语句
+spring.jpa.show-sql: true
+# 自动检查实体和数据库表是否一致，如果不一致则会进行更新数据库表
+spring.jpa.hibernate.ddl-auto: update
+
+
+#开启二级缓存
+spring.jpa.properties.hibernate.cache.use_second_level_cache: true
+spring.jpa.properties.cache.use_query_cache: true
+spring.jpa.properties.cache.provider_configuration_file_resource_path: ehcache.xml
+#指定缓存provider
+spring.jpa.properties.hibernate.cache.region.factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+spring.jpa.open-in-view: false
+spring.jpa.properties.javax.persistence.sharedCache.mode: NONE
+#格式化sql语句
+spring.jpa.properties.hibernate.format_sql: false

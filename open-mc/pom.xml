@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.myframe</groupId>
+    <artifactId>open-mc</artifactId>
+    <version>1.0.0</version>
+    <name>open-mc</name>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>cn.myframe</groupId>
+        <artifactId>springopen</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+	
+	<modules>
+		<module>open-mc-rabbitmq</module>
+		<module>open-mc-activemq</module>
+		<module>open-mc-kafka</module>
+		<module>open-mc-elasticsearch</module>
+		<module>open-mc-netty</module>
+		<module>open-mc-fastdfs</module>
+		<module>open-mc-activiti</module>
+		<module>open-mc-rocketmq</module>
+		<module>open-mc-solrcloud</module>
+        <module>open-mc-testng</module>
+    </modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

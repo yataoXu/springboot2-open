@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/xterm/sockjs.min.js"></script>
+	<script src="js/xterm/stomp.min.js"></script>
+	<link href="js/xterm/xterm.css" rel="stylesheet"></link>
+	<script src="js/xterm/xterm.js"></script>
+</head>
+<body>
+
+	<div id="terminal"></div>
+	<div id="terminal2" style="height: 10%">
+		<div id="desc"></div><br>
+		IP:<input id="ip" type="text" value="47.106.106.**"></input>
+		Port:<input id="port" type="text" value="22"></input>
+		用户名:<input id="username" type="text" value="root"></input>
+		密码:<input id="password" type="text" value="*"></input>
+		<button onclick="connect()">登录</button>
+		<button onclick="disconnect()">断开</button>
+	</div>
+
+<script>
+	var stompClient ;
+	var term = new Terminal({
+		cols: 150,
+		rows: 35,
+		screenKeys: true,
+		useStyle: true,
+		cursorBlink: true
+	});
+
+	term.open(document.getElementById('terminal'));
+	term.on('data', function($data) {
+		//term.write($data);
+		stompClient.send("/send/receive/1",{}, $data );
+	});
+
+	document.onkeydown=function(){
+		if (event.keyCode == 13){
+			term.write("\n\r");
+		}
+	}
+
+</script>
+<script>
+	$(document).ready(function() {
+		openSocket();
+	});
+	function openSocket() {
+		if(stompClient==null){
+			var socketPath ='ws://127.0.0.1:8080/websocket';
+			var socket = new WebSocket(socketPath);
+			stompClient = Stomp.over(socket);
+			var headers={
+				"Access-Control-Allow-Origin":"*",
+				"Access-Control-Allow-Credentials":"true",
+				"token":"kltoen"
+			};
+			stompClient.connect(headers, function(frame) {
+				$("#desc").html("WebSocket已连接");
+				stompClient.subscribe('/topic/1', function(event) {
+					term.write(event.body);
+				},headers);
+			},function (error) {
+				$("#desc").html("WebSocket连接失败");
+			});
+
+			window.setInterval(function(){ //每隔5秒钟发送一次心跳，避免websocket连接因超时而自动断开
+				stompClient.send(" ");
+			},30000);
+		}
+	}
+
+	function connect() {
+		$.ajax({
+			type: "GET",
+			url: "http://127.0.0.1:8080/connect?user="+$("#username").val()+
+			           "&host="+$("#ip").val()+ "&port="+$("#port").val()+
+			           "&password="+$("#password").val()+"&id=1"
+		});
+	}
+
+	function disconnect() {
+		$.ajax({
+			type: "GET",
+			url: "http://127.0.0.1:8080/disconnect?&id=1"
+		});
+	}
+</script>
+</body>
+</html>

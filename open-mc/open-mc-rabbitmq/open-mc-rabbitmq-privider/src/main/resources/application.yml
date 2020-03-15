@@ -1,0 +1,5 @@
+spring.rabbitmq.addresses: 10.10.2.139
+spring.rabbitmq.username: admin
+spring.rabbitmq.password: admin
+spring.rabbitmq.publisher-confirms: true
+spring.rabbitmq.virtual-host: /

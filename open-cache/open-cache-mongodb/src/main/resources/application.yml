@@ -1,0 +1,4 @@
+#myframe和myframe123分别为用户和密码
+spring.data.mongodb.uri: mongodb://myframe:myframe123@10.10.2.137:27017/receiver?maxPoolSize=256
+# 多个IP集群可以采用以下配置：
+#spring.data.mongodb.uri=mongodb://user:pwd@ip1:port1,ip2:port2/database

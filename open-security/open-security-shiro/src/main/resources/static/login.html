@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html class="no-js css-menubar" lang="zh-cn">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- 移动设备 viewport -->    
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui"/>
+    <!-- 360浏览器默认使用Webkit内核 -->   
+    <meta name="renderer" content="webkit"/>
+    <!-- 禁止搜索引擎抓取 -->    
+    <meta name="robots" content="nofollow"/>
+    <!-- 禁止百度SiteAPP转码 -->    
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!-- Chrome浏览器添加桌面快捷方式（安卓） -->    
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <link rel="icon" type="image/png" href="public/images/favicon.ico"/>
+    <!-- Safari浏览器添加到主屏幕（IOS） -->    
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-title"/>
+    <link rel="icon" sizes="192x192" href="public/images/favicon.ico"/>
+    <!-- Win8标题栏及ICON图标 -->    
+    <meta name="msapplication-TileColor" content="#62a8ea"/>
+    <meta name="msapplication-TileImage" content="public/images/favicon.ico"/>
+    <link rel="apple-touch-icon-precomposed" href="public/images/favicon.ico"/>
+    <title>
+             登录 - 通用框架
+    </title>
+    <!-- Bootstrap CSS -->    
+    <link rel="stylesheet" href="public/css/login/bootstrap.css"/>
+    <link rel="stylesheet" href="public/fonts/web-icons.css"/>
+    <!-- Site CSS -->    
+    <link rel="stylesheet" href="public/css/login/site.css"/> 
+    <!-- Page CSS -->    
+    <link rel="stylesheet" href="public/css/login/login.css"/>
+
+  </head>
+  <body class="page-login layout-full page-dark">
+    <div id="app" class="page h-full">
+      <div class="page-content h-full">
+        <div class="page-brand-info vertical-align animation-slide-left d-none d-sm-block">
+          <div class="page-brand vertical-align-middle">
+            <div class="brand">
+              <img class="brand-img" src="public/images/favicon.ico" height="50" />
+            </div>
+            <h2 class="title">
+              	通用管理系统快速开发框架
+            </h2>
+            <ul class="list-icons description">
+              <li>
+                <i class="wb-check" aria-hidden="true">
+                </i>
+                 	一个基于最新 Web技术的企业级通用管理系统快速开发框架，可以帮助企业极大的提高工作效率，节省开发成本，提升品牌形象。
+                    
+              </li>
+              <li>
+                <i class="wb-check" aria-hidden="true">
+                </i>
+                			  快速开发各种管理系统。
+              </li>
+              <li>
+                <i class="wb-check" aria-hidden="true">
+                </i>
+               				  紧贴业务特性，涵盖了大量的常用组件和基础功能，最大程度上帮助企业节省时间成本和费用开支。
+              </li>
+            </ul>
+           
+          </div>
+        </div>
+        <div class="page-login-main animation-fade">
+        	<div class="alert alert-danger alert-dismissible"  v-show="error" >{{errorMsg}}！</div>
+          <div class="vertical-align">
+            <div class="vertical-align-middle">
+              <div class="brand text-center">
+                <img class="brand-img" src="public/images/favicon.ico" height="50"/>
+              </div>
+              <h3 class="d-none d-sm-block">
+                      	 登录MyFrame
+              </h3>
+
+              <form class="login-form" method="post" name="loginForm" id="loginForm">
+             
+                <div class="form-group">
+	                  <label class="sr-only" for="username">用户名</label>
+	                  <input type="text" class="form-control" name="username" id="username" value="" v-model="username" placeholder="请输入用户名"/>
+                </div>
+                
+                <div class="form-group">
+	                  <label class="sr-only" for="password">密码</label>
+	                  <input type="password" class="form-control" name="password" id="password" v-model="password" placeholder="请输入密码"/>
+                </div>
+                
+                
+                <div class="form-group">
+	                  <label class="sr-only" for="password">
+	               	     验证码
+	                  </label>
+	                  <div class="input-group">
+	                    <input type="text" class="form-control" name="kaptcha" id="kaptcha" v-model="captcha" placeholder="请输入验证码"/>
+	                    <div class="input-group-append">
+	                      <a href="javascript:;" class="btn btn-default btn-outline p-0 m-0 reload-vify">
+	                        <img :src="src" @click="refreshCode" height="40"/>
+	                      </a>
+	                    </div>
+	                  </div>
+                </div>
+                <div class="form-group clearfix">
+                  <div class="checkbox-custom checkbox-inline checkbox-primary float-left">
+                    <input type="checkbox" id="rememberMe" name="rememberMe" value="on"/>
+                    <label for="remember">
+                     	 自动登录
+                    </label>
+                  </div>
+                  <a class="float-right collapsed" data-toggle="collapse" href="#forgetPassword" aria-expanded="false" aria-controls="forgetPassword">
+                            	    忘记密码了？
+                  </a>
+                </div>
+                <div class="collapse" id="forgetPassword" aria-expanded="true">
+                  <div class="alert alert-warning alert-dismissible" role="alert">
+                            	    请联系管理员重置密码。
+                  </div>
+                </div>
+                <button  type="button" class="btn btn-primary btn-block" @click="login">
+                                     立即登录
+                </button>
+              </form>
+            </div>
+          </div>
+          <footer class="page-copyright">
+            <p>广州 ©                    
+              <a href="http://baidu.com" target="_blank">
+                http://baidu.com
+              </a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </div>
+    
+    <script src="public/libs/jquery.min.js"></script>
+    <script src="public/libs/vue.min.js"></script>
+    <script src="public/js/login.js"></script>
+
+  </body>
+  
+  
+</html>

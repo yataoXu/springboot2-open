@@ -1,0 +1,33 @@
+spring.profiles.active: dev
+myframe:
+   user:
+      name: tom
+      age: 29
+      address: 广东广州天河
+      uuid: ${random.uuid}
+      desc: ${myframe.user.name} is ${myframe.user.age} years old
+      date: 2018/09/20
+      hobbys: 打球,写代码
+      maps: "{key1: 'value1', key2: 'value2'}"
+
+
+---
+spring.profiles: dev
+myframe:
+   preuser:
+      name: dev
+      age: 29
+      address: 广东广州天河[dev]
+      uuid: ${random.uuid}
+      desc: ${myframe.user.name} is ${myframe.user.age} years old
+      date: 2018/09/20
+      hobby[0]: 打球[dev]
+      hobby[1]: 写代码[dev]
+      friends:
+         - name: tom
+           age: 20
+         - name: may
+           age: 30
+      brother:
+          tom: 10
+          lili: 11

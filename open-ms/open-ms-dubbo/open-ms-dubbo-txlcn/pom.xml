@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>open-ms-dubbo-txlcn</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0</version>
+	<description>open-ms-dubbo-txlcn</description>
+
+	<parent>
+		<groupId>cn.myframe</groupId>
+		<artifactId>open-ms-dubbo</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	
+	<modules>
+		<module>open-ms-dubbo-txlcn-consumer</module>
+		<module>open-ms-dubbo-txlcn-provider</module>
+		<module>open-ms-dubbo-txlcn-manager</module>
+	</modules>
+
+	<properties>
+		<codingapi.txlcn.version>5.0.0.RC2</codingapi.txlcn.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.47</version>
+		</dependency>
+
+
+	</dependencies>
+
+
+
+</project>

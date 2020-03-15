@@ -1,0 +1,48 @@
+spring.application.name: spring-cloud-eureka
+server.port: 8001
+spring.profiles: server1
+#eureka的client注册到server时默认是使用hostname而不是ip,需要使用ip来服务到eureka-server上，需要在eureka的client增加配置如下：
+eureka.instance.instance-id: 10.10.2.60:${server.port}
+#表示是否将自己注册到Eureka Server，默认为true
+#eureka.client.register-with-eureka: false
+#表示是否从Eureka Server获取注册信息，默认为true
+eureka.client.fetch-registry: false
+#设置与Eureka Server交互的地址，查询服务和注册服务都需要依赖这个地址。默认是http://localhost:8761/eureka  多个地址可使用 , 分隔
+eureka.client.serviceUrl.defaultZone: http://10.10.2.60:8002/eureka/
+
+---
+spring.application.name: spring-cloud-eureka
+spring.profiles: server2
+server.port: 8002
+eureka.instance.instance-id: 10.10.2.60:${server.port}
+eureka.client.serviceUrl.defaultZone: http://10.10.2.60:8001/eureka/
+
+---
+#生产者
+spring.application.name: spring-cloud-producer
+server.port: 9001
+#eureka的client注册到server时默认是使用hostname而不是ip,需要使用ip来服务到eureka-server上，需要在eureka的client增加配置如下：
+#eureka.instance.prefer-ip-address: true
+#eureka.instance.instance-id: 127.0.0.1:${server.port}
+spring.profiles: producer
+eureka.client.serviceUrl.defaultZone: http://127.0.0.1:8002/eureka/,http://127.0.0.1:8001/eureka/
+
+---
+#生产者2
+spring.application.name: spring-cloud-producer
+server.port: 9003
+spring.profiles: producer2
+eureka.instance.instance-id: 127.0.0.1:${server.port}
+eureka.client.serviceUrl.defaultZone: http://127.0.0.1:8002/eureka/,http://127.0.0.1:8001/eureka/
+
+---
+#消费者
+spring.application.name: spring-cloud-consumer
+spring.profiles: consumer
+server.port: 9002
+eureka.instance.instance-id: 127.0.0.1:${server.port}
+eureka.client.serviceUrl.defaultZone: http://127.0.0.1:8002/eureka/,http://127.0.0.1:8001/eureka/
+
+feign.hystrix.enabled: true
+spring.main.allow-bean-definition-overriding: true
+

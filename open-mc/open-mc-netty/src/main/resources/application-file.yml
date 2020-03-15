@@ -1,0 +1,5 @@
+netty:
+   file:
+     enabled: true
+     path: d:\
+     port: 3456

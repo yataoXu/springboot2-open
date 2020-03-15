@@ -1,0 +1,12 @@
+#false时为单机模式，true时为zookeeper高可用模式
+canal.client.instances.example.clusterEnabled: true
+#canal.client.instances.example.host: 10.10.2.137
+#zookeeper 地址
+canal.client.instances.example.zookeeperAddress: 10.10.2.137:2181,10.10.2.138:2181,10.10.2.139:2181
+
+canal.client.instances.example.port: 11111
+canal.client.instances.example.batchSize: 1000
+canal.client.instances.example.acquireInterval: 1000
+canal.client.instances.example.retryCount: 20
+
+spring.main.allow-bean-definition-overriding: true

@@ -1,0 +1,17 @@
+spring:
+  messages:
+    basename: i18n/Messages,i18n/Pages
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver      # 配置MySQL的驱动程序类
+    #url: jdbc:mysql://10.10.2.139:8066/tableShared?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8    #读写分离
+    #url: jdbc:mysql://10.10.2.139:8066/tableShared?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8           # 数据库连接地址
+    url: jdbc:mysql://10.10.2.139:3306/dbshared?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    #url: jdbc:mysql://10.10.2.139:8066/ershared?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: slave                                  # 数据库用户名
+    password: Rojao@123                                 # 数据库连接密码
+    type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
+
+# Mybatis配置
+mybatis:
+    mapperLocations: classpath:mapper/*/*.xml
+    configLocation: classpath:mybatis.xml

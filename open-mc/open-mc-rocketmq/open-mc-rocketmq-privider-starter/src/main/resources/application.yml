@@ -1,0 +1,5 @@
+server:
+  port: 9666
+#多个nameserver通过;分隔
+rocketmq.name-server: 10.10.2.137:9876
+rocketmq.producer.group: my-group

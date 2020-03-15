@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>open-mc-activemq</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0.0</version>
+	<description>open-mc-activemq</description>
+
+	<parent>
+		<groupId>cn.myframe</groupId>
+		<artifactId>open-mc</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<zookeeper.version>3.4.8</zookeeper.version>
+		<curator.version>2.11.1</curator.version>
+	</properties>
+	
+	<dependencies>
+
+
+		<!-- activemq自动配置依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-activemq</artifactId>
+		</dependency>
+
+		<!-- 连接池依赖 -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+		</dependency>
+
+		<!-- 如果springboot是2.x.x的版本如果启用连接池（spring.activemq.pool.enabled=true），就必须引入这个依赖，否则启动时会报错，提示找不到JmsMessagingTemplate
+             springboot是1.5.x的版本就不需要引入，
+             这是因为springboot1.5.x使用的是org.apache.activemq.pool.PooledConnectionFactory，
+             而springboot2.x.x时候用的org.messaginghub.pooled.jms.JmsPoolConnectionFactory，
+             可以通过源码查看：
+             org.springframework.boot.autoconfigure.jms.activemq.ActiveMQConnectionFactoryConfiguration : 负责初始化ConnectionFactory
+             org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration  : 负责初始化JmsMessagingTemplate -->
+		<dependency>
+			<groupId>org.messaginghub</groupId>
+			<artifactId>pooled-jms</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+
+
+
+		
+    </dependencies>
+	
+	<build>
+        <plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+				<archive>
+				<manifest>
+				<addClasspath>true</addClasspath>
+				<classpathPrefix>lib/</classpathPrefix>
+				<mainClass>cn.myframe.ActivemqApplication</mainClass>    <!-- 入口类名 -->
+				</manifest>
+				</archive>
+				<excludes>
+						<exclude>**/logback-spring.xml</exclude>
+			    </excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+				<execution>
+				<id>copy</id>
+				<phase>install</phase>
+				<goals>
+					<goal>copy-dependencies</goal>
+				</goals>
+				<configuration>
+				<outputDirectory>${project.build.directory}/lib</outputDirectory>  <!-- 拷贝所以依赖存放位置 -->
+				</configuration>
+				</execution>
+				</executions>
+			</plugin>
+		</plugins>
+    </build>
+
+
+</project>

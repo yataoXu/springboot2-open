@@ -1,0 +1,10 @@
+server:
+  port: 9888
+
+spring.application.name: privider
+rocketmq:
+  # 生产者配置
+  producer: 
+    groupName: ${spring.application.name}
+    namesrvAddr: 10.10.2.137:9876
+    default: false

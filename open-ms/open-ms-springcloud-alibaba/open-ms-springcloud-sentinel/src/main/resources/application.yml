@@ -1,0 +1,7 @@
+spring.application.name: MySentinel
+server.port: 8001
+
+spring.cloud.sentinel.eager: true
+spring.cloud.sentinel.transport.port: 8720
+spring.cloud.sentinel.transport.dashboard: 10.10.2.139:8234
+spring.cloud.sentinel.transport.heartbeat-interval-ms: 500

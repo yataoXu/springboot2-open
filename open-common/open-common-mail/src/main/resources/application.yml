@@ -1,0 +1,9 @@
+#邮箱服务器地址
+spring.mail.host: smtp.***.cn
+#用户名
+spring.mail.username: ****@****.cn
+#密码
+spring.mail.password: *****
+spring.mail.default-encoding: UTF-8
+spring.mail.sendTo: *****@qq.com
+

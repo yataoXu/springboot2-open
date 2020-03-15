@@ -1,0 +1,18 @@
+server.port: 8081
+spring.rabbitmq.addresses: 10.10.2.139
+spring.rabbitmq.username: admin
+spring.rabbitmq.password: admin
+spring.rabbitmq.publisher-confirms: true
+spring.rabbitmq.virtual-host: /
+spring:
+  rabbitmq:
+    #消费端
+    listener:
+      simple:
+        acknowledge-mode: manual
+        #初始连接数量
+        concurrency: 5
+        #最大连接数量
+        max-concurrency: 10
+        #每一次发送到消费者的消息数量
+        prefetch: 250

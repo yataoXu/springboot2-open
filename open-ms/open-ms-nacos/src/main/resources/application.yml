@@ -1,0 +1,4 @@
+spring.application.name: test
+
+nacos.config.server-addr: 10.10.2.137:8848
+nacos.discovery.server-addr: 10.10.2.137:8848

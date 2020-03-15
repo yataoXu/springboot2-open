@@ -1,0 +1,30 @@
+# Tomcat
+server:
+    tomcat:
+        max-threads: 1000
+        min-spare-threads: 10
+    port: 8091
+
+spring:
+     dubbo:
+             appname: consumer
+             registry: zookeeper://10.10.2.138:2181?backup=10.10.2.139:2181,10.10.2.137:2181
+             protocol:
+                    name: dubbo
+                    port: 20883
+
+#启动时检查(check),关闭所有服务的启动时检查     @Reference(check = false)
+spring.dubbo.consumer.check: false
+#超时(timeout,默认为1000)，    @Reference(timeout=XXX)
+spring.dubbo.consumer.timeout: 10000　
+#超时后,重试次数(retries)      @Reference(retries=XXX)
+spring.dubbo.consumer.retries: 1
+#spring.dubbo.consumer.Cluster: broadcast
+#spring.dubbo.consumer.loadbalance: roundrobin
+#spring.dubbo.consumer.url: dubbo://localhost:20881
+#是否注册服务
+spring.dubbo.server: false
+spring.dubbo.application: dubbo-consumer
+spring.application.name: dubbo-consumer
+
+

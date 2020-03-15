@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>open-security-oauth2</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0.0</version>
+	<description>open-security-oauth2</description>
+
+	<parent>
+		<groupId>cn.myframe</groupId>
+		<artifactId>open-security</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	
+	<properties>
+	</properties>
+	
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- 由于一些注解和API从spring security5.0中移除，所以需要导入下面的依赖包  -->
+		<dependency>
+			<groupId>org.springframework.security.oauth.boot</groupId>
+			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+			<version>2.1.0.RELEASE</version>
+		</dependency>
+
+
+
+
+	</dependencies>
+	
+	<build>
+        <plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+				<archive>
+				<manifest>
+				<addClasspath>true</addClasspath>
+				<classpathPrefix>lib/</classpathPrefix>
+				<mainClass>cn.myframe.Oauth2Application</mainClass>    <!-- 入口类名 -->
+				</manifest>
+				</archive>
+				<excludes>
+						<exclude>**/logback-spring.xml</exclude>
+			    </excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+				<execution>
+				<id>copy</id>
+				<phase>install</phase>
+				<goals>
+					<goal>copy-dependencies</goal>
+				</goals>
+				<configuration>
+				<outputDirectory>${project.build.directory}/lib</outputDirectory>  <!-- 拷贝所以依赖存放位置 -->
+				</configuration>
+				</execution>
+				</executions>
+			</plugin>
+		</plugins>
+    </build>
+
+
+</project>

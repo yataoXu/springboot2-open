@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE mycat:schema SYSTEM "schema.dtd">
+<mycat:schema xmlns:mycat="http://io.mycat/">
+	
+	<schema name="mydb" checkSQLschema="false" sqlMaxLimit="100" dataNode="rw" />
+	
+	
+	<!-- 分表 -->
+	<!-- name:逻辑数据库名 checkSQLschema:把schema的字符去掉 sqlMaxLimit:减少过多的数据返回-->
+	<schema name="tableShared" checkSQLschema="false" sqlMaxLimit="100">
+		<!-- name:逻辑表表名 primaryKey:逻辑表对应真实表的主键 autoIncrement:主键自增长 dataNode:逻辑表所属的dataNode rule:逻辑表使用的规则名字 -->
+		<table name="bus_receiver" primaryKey="id" autoIncrement="true" subTables="bus_receiver_$1-3" dataNode="table1" rule="mod-long"/>
+	</schema>
+	
+	<!-- 分库 -->
+	<schema name="dbshared" checkSQLschema="false" sqlMaxLimit="100">
+		<!-- name:逻辑表表名 primaryKey:逻辑表对应真实表的主键 autoIncrement:主键自增长 dataNode:逻辑表所属的dataNode rule:逻辑表使用的规则名字 -->
+		<table name="bus_receiver" primaryKey="id" autoIncrement="true"  dataNode="db1,db2,db3" rule="mod-long"/>
+	</schema>
+	
+	<!-- 使用ER Join -->
+	<schema name="ershared" checkSQLschema="false" sqlMaxLimit="100">
+		<!-- name:逻辑表表名 primaryKey:逻辑表对应真实表的主键 autoIncrement:主键自增长 dataNode:逻辑表所属的dataNode rule:逻辑表使用的规则名字 -->
+		<table name="bus_receiver" primaryKey="id" autoIncrement="true"  dataNode="db1,db2,db3" rule="mod-long">
+		    <childTable name="bus_group_receiver_map" primaryKey="id" joinKey="receiver_id" parentKey="id" autoIncrement="true"/>
+		</table>
+		<!-- 全局表 所有分片执行 -->
+		<table name="bus_group" dataNode="db1,db2,db3" type="gloab"/>
+		<table name="bus_region" dataNode="db1,db2,db3" rule="mod-long" primaryKey="id" autoIncrement="true"/>
+	</schema>
+
+
+	<dataNode name="rw" dataHost="rwlocalhost" database="slave" />
+	<!-- name:数据节点名 dataHost:该分片属于哪个数据库实例 database:定义该分片属性哪个具体数据库实例上的具体库 -->
+	<dataNode name="table1" dataHost="localhost137" database="tableShared" />
+	<dataNode name="db1" dataHost="localhost137" database="dbshared" />
+	<dataNode name="db2" dataHost="localhost137" database="dbshared2" />
+	<dataNode name="db3" dataHost="localhost139" database="dbshared" />
+	
+   
+	<dataHost name="rwlocalhost" maxCon="1000" minCon="10" balance="1" writeType="0" dbType="mysql" dbDriver="native" >
+		<heartbeat>select user()</heartbeat>
+		<writeHost host="hostM1" url="10.10.2.137:3306" user="slave" password="Rojao@123" > 
+			<readHost host="hostS1" url="10.10.2.138:3306" user="slave" password="Rojao@123" />
+		</writeHost>
+	</dataHost>	
+	<!-- name:数据库实例名 -->
+	<dataHost name="localhost137" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql" dbDriver="native" switchType="1"  slaveThreshold="100">
+		<!-- 用于和后端数据库进行心跳检查的语句 -->
+		<heartbeat>select user()</heartbeat>
+		<!-- 写实例 -->
+		<writeHost host="hostM1" url="10.10.2.137:3306" user="slave" password="Rojao@123">
+			<!-- 读实例 -->
+			<readHost host="hostS2" url="10.10.2.138:3306" user="slave" password="Rojao@123" />
+		</writeHost>
+	</dataHost>
+	<!-- name:数据库实例名 -->
+	<dataHost name="localhost139" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql" dbDriver="native" switchType="1"  slaveThreshold="100">
+		<!-- 用于和后端数据库进行心跳检查的语句 -->
+		<heartbeat>select user()</heartbeat>
+		<!-- 写实例 -->
+		<writeHost host="hostM1" url="10.10.2.139:3306" user="slave" password="Rojao@123">
+			<!-- 读实例 -->
+			<readHost host="hostS2" url="10.10.2.139:3306" user="slave" password="Rojao@123" />
+		</writeHost>
+	</dataHost>
+
+
+</mycat:schema>

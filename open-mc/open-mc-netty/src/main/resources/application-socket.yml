@@ -1,0 +1,4 @@
+netty:
+   socket:
+     enabled: true
+     port: 4445

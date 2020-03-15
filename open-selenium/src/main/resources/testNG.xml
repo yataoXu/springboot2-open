@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="百度搜索">
+    <listeners>
+        <listener class-name="cn.myframe.ExtentTestNGIReporterListener"></listener>
+    </listeners>
+
+    <test name="搜索业务">
+        <!--<classes>
+            <class name="cn.myframe.TestHelloWold"></class>
+        </classes>-->
+
+        <classes>
+            <class name="cn.myframe.NiasTest"></class>
+        </classes>
+    </test>
+</suite>

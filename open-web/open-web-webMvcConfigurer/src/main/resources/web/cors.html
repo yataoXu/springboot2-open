@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script>
+            $.ajax({
+                type:"GET",
+                url: "http://localhost:8080/preUser",
+                dataType:"json",
+                success:function(data, status, xhr){
+                    console.log(data);
+                    console.log(xhr.getAllResponseHeaders());
+                },
+                error:function(jqXHR){
+                    console.log("Error: "+jqXHR.status);
+                }
+            });
+		</script>
+	</head>
+	<body>
+		cores.html
+	</body>
+</html>

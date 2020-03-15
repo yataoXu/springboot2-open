@@ -1,0 +1,24 @@
+server:
+  port: 8088 #设置一个默认组
+
+spring:
+  messages:
+    basename: i18n/Messages,i18n/Pages
+  kafka:
+    #bootstrap-servers: 10.10.2.138:9092,10.10.2.138:9093,10.10.2.138:9094
+    bootstrap-servers: 47.106.106.53:9092
+    template:
+      default-topic: self-topic0
+    consumer:
+          key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          group-id: myGroup998
+          # 最早未被消费的offset
+          auto-offset-reset: earliest
+          # 批量一次最大拉取数据量
+          max-poll-records: 1000
+          # 自动提交
+          enable-auto-commit: false
+    consumer-extra:
+           # 是否批量处理
+           batch-listener: true

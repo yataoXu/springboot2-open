@@ -1,0 +1,22 @@
+# Mybatis配置
+mybatis:
+    mapperLocations: classpath:mapper/*/*.xml
+    configLocation: classpath:mybatis.xml
+
+sharding.jdbc:
+    data-sources:      # 注意命名格式
+      ds_master:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/sharding-master?useUnicode=true&characterEncoding=utf-8&useSSL=true
+        username: root
+        password: Rojao@123
+      ds_slave_0:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/sharding-slave?useUnicode=true&characterEncoding=utf-8&useSSL=true
+        username: root
+        password: Rojao@123
+    master-slave-rule:
+      name: ds_ms
+      master-data-source-name: ds_master
+      slave-data-source-names: ds_slave_0
+      load-balance-algorithm-type: round_robin

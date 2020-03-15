@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="public/libs/jquery.min.js"></script>
+		<script>
+            function rd() {
+                send("http://127.0.0.1:8080/sysRead");
+            }
+
+            function wr() {
+                send("http://127.0.0.1:8080/sysWrite");
+            }
+            function del(){
+                send("http://127.0.0.1:8080/sysDelete");
+            }
+
+            function send(url){
+                $.ajax({
+                    type:"GET",
+                    url: url,
+                    success:function(data, status, xhr){
+                        console.log(data);
+                        $("#display").html(data);
+                    },
+                    error:function(jqXHR){
+                        console.log(JSON.stringify(jqXHR));
+                    }
+                });
+			}
+		</script>
+	</head>
+	<body>
+		<button type="button" onclick="rd()">read</button>
+		<button type="button" onclick="wr()">write</button>
+		<button type="button" onclick="del()">delete</button>
+	    <br><br>
+		<div id="display"></div>
+	</body>
+</html>

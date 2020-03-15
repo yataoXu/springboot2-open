@@ -1,0 +1,59 @@
+spring.profiles.active: provider4
+spring.dubbo.application: dubbo-provider
+---
+# Tomcat
+server:
+    tomcat:
+        max-threads: 1000
+        min-spare-threads: 10
+    port: 8092
+
+spring.profiles: provider1
+spring:
+     dubbo:
+             appname: provider
+             registry: zookeeper://10.10.2.138:2181?backup=10.10.2.139:2181,10.10.2.137:2181
+             protocol:
+                     name: dubbo
+                     port: 20881
+                     host: 127.0.0.1
+                     serialization: hessian2
+
+spring.dubbo.server: true
+spring.application.name: dubbo-provider
+
+---
+# Tomcat
+server:
+    tomcat:
+        max-threads: 1000
+        min-spare-threads: 10
+    port: 8192
+
+spring.profiles: provider2
+spring:
+     dubbo:
+             appname: provider
+             registry: zookeeper://10.10.2.138:2181?backup=10.10.2.139:2181,10.10.2.137:2181
+             protocols:
+                 - name: rmi
+                   port: 7885
+                   hose: 127.0.0.1
+                 - name: dubbo
+                   port: 28802
+                   hose: 127.0.0.1
+                   serialization: hessian2
+                 - name: http
+                   port: 8500
+                   server: servlet
+
+spring.dubbo.server: true
+spring.application.name: dubbo-provider
+#spring.dubbo.application.logger:
+---
+spring.profiles: provider4
+server:
+    tomcat:
+        max-threads: 1000
+        min-spare-threads: 10
+    port: 8099

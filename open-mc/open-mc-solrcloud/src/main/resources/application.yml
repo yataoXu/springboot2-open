@@ -1,0 +1,2 @@
+spring.data.solr.repositories.enabled: true
+spring.data.solr.zk-host: 10.10.2.137:2181,10.10.2.138:2181,10.10.2.139:2181

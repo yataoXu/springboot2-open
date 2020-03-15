@@ -1,0 +1,15 @@
+netty:
+   proxy-server:
+     enabled: true
+     port: 9562
+     client-server:
+              - port: 8110
+                bind: 47.116.116.53:22
+                keys: 123
+              - port: 8220
+                bind: 127.0.0.1:1999
+                keys: 123
+              - port: 8230
+                bind: 47.116.116.53:9050
+                keys: 123
+             

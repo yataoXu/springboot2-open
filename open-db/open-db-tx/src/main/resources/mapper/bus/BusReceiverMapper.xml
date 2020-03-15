@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="cn.myframe.dao.BusReceiverDao">
+
+    <select id="findById" resultType="cn.myframe.entity.BusReceiverEntity">
+        SELECT * from bus_receiver where id = #{id} ;
+    </select>
+
+    <insert id="batchInsert">
+        insert into bus_receiver(id,name,region_code,address,enname,memberfamily)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            ( #{item.id},#{item.name}, #{item.regionCode}, #{item.address}, #{item.enName}, #{item.memberFamily})
+        </foreach>
+    </insert>
+
+    <insert id="batchInsertSequence ">
+        /*!mycat: catlet=io.mycat.route.sequence.BatchInsertSequence */
+        insert into bus_receiver(name,region_code,address,enname,memberfamily)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            ( #{item.name}, #{item.regionCode}, #{item.address}, #{item.enName}, #{item.memberFamily})
+        </foreach>
+    </insert>
+
+</mapper>
